@@ -6,11 +6,16 @@ from tkinter import filedialog, messagebox, ttk
 from PIL import ImageTk,Image
 from operator import itemgetter
 
+img_icon = 'data/image/icon2.ico'
+std_mark_db = 'data/student_mark_database.db'
+std_detail_db = 'data/student_detail_database.db'
+
 def logging_window(): # Logging Display
+	global img_icon
 	logging = Tk()
-	logging.title('Student Database Login')
+	logging.title('S.M.S. Login')
 	logging.resizable(False, False)
-	logging.iconbitmap('data/image/icon.ico')
+	logging.iconbitmap(img_icon)
 	#root.geometry("800x600")
 
 	def confirm_logging(event=None):
@@ -27,7 +32,7 @@ def logging_window(): # Logging Display
 	logging_add_frame = LabelFrame(logging, padx=1, pady=1, bg='#424242', relief="flat")
 	logging_add_frame.grid(row=1, column=0, sticky=W+E)
 	# Label
-	logo_logging_label = Label(logging_logo_frame, text="PATHAKADA NAVODYA M.V", padx=5, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
+	logo_logging_label = Label(logging_logo_frame, text="Student Management System", padx=5, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
 	logging_username_label =Label(logging_add_frame, text="Username", padx=5, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"), anchor=W)
 	logging_password_label =Label(logging_add_frame, text="Password", padx=5, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"), anchor=W)
 	logo_logging_label.pack(fill=BOTH)
@@ -46,10 +51,11 @@ def logging_window(): # Logging Display
 	mainloop()
 
 def main_menu_window():
+	global img_icon
 	main_menu = Tk()
-	main_menu.title('Student Database Main Menu')
+	main_menu.title('S.M.S. Main Menu')
 	main_menu.resizable(False, False)
-	main_menu.iconbitmap('data/image/icon.ico')
+	main_menu.iconbitmap(img_icon)
 	#root.geometry("800x600")
 
 	def add_detail_enter(event):
@@ -69,7 +75,7 @@ def main_menu_window():
 	def edit_marks_leave(event):
 		edit_student_mark_button.config(image=edit_marks_img) 
 
-	logo_img = ImageTk.PhotoImage(Image.open("data/image/logo2.jpg"))
+	logo_img = ImageTk.PhotoImage(Image.open("data/image/logo1.jpg"))
 	add_details_img = ImageTk.PhotoImage(Image.open("data/image/add_detail.jpg"))
 	add_details_focus_img = ImageTk.PhotoImage(Image.open("data/image/add_detail_focus.jpg"))
 	search_database_img = ImageTk.PhotoImage(Image.open("data/image/search_database.jpg"))
@@ -86,7 +92,7 @@ def main_menu_window():
 	main_menu_add2_frame = LabelFrame(main_menu, bg='#424242', relief="flat")
 	main_menu_add2_frame.grid(row=0, column=0, sticky=W+E+N+S)
 	# Label
-	logo_main_menu_label = Label(main_menu_logo_frame, image=logo_img, width=138, height=145, text="PATHAKADA NAVODYA M.V", bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
+	logo_main_menu_label = Label(main_menu_logo_frame, image=logo_img, width=138, height=145, text="Student Management System", bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
 	logo_main_menu_label.pack(pady=(110,0))
 	'''
 	# Buttons
@@ -124,20 +130,22 @@ def main_menu_window():
 	mainloop()
 
 def add_student_detail_database(event):
+	global img_icon
 	add_student_detail_window =  Toplevel()
-	add_student_detail_window.title('Student Database - Add Student Details')
+	add_student_detail_window.title('S.M.S. - Add Student Details')
 	add_student_detail_window.resizable(False, False)
-	add_student_detail_window.iconbitmap('data/image/icon.ico')
+	add_student_detail_window.iconbitmap(img_icon)
 	add_student_detail_window.grab_set()
 	#root.geometry("800x600")
 
 	def submit_student_details():
+		global std_detail_db
 		if add_admission_num_entry.get()=="" or add_fullname_entry.get()=="" or add_address_entry.get()=="" or add_birth_division_entry.get()=="" or add_birth_registey_entry.get()=="" or add_identi_type_entry.get()=="":
 			messagebox.showerror("Error", " Entry can't be blank" ,parent=add_student_detail_window)
 		else:
 			response3 = messagebox.askquestion("Attention", " Do you want to add Student Details into Database? ", parent=add_student_detail_window)
 			if response3 == 'yes':
-				conn = sqlite3.connect('data/student_detail_database.db')
+				conn = sqlite3.connect(std_detail_db)
 				c = conn.cursor()
 				if birthday_month.get() == 'January':
 					birthday_month_temp = '1'
@@ -203,7 +211,7 @@ def add_student_detail_database(event):
 	add_birthday_frame.grid(row=3, column=1, sticky=W+E)
 
 	# Label
-	logo_add_detail_label = Label(add_student_detail_menu_frame, text="PATHAKADA NAVODYA M.V", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
+	logo_add_detail_label = Label(add_student_detail_menu_frame, text="Student Management System", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
 	add_admission_num_label = Label(add_student_detail_add_frame, text="Admission Number : ", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic")) 
 	add_fullname_label = Label(add_student_detail_add_frame, text="Full Name : ", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic")) 
 	add_gender_label = Label(add_student_detail_add_frame, text="Gender : ", padx=5, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic")) 
@@ -277,19 +285,21 @@ def add_student_detail_database(event):
 	birthday_year.set('2000')
 
 def edit_student_mark_database(event):
+	global img_icon
+	global oid_of_edit_mark
 	edit_student_mark_window =  Toplevel()
-	edit_student_mark_window.title('Student Database - Update / Delete Student Marks')
+	edit_student_mark_window.title('S.M.S. - Update / Delete Student Marks')
 	edit_student_mark_window.resizable(False, False)
-	edit_student_mark_window.iconbitmap('data/image/icon.ico')
+	edit_student_mark_window.iconbitmap(img_icon)
 	edit_student_mark_window.grab_set()
 	#root.geometry("800x600")
-	global oid_of_edit_mark
 	oid_of_edit_mark = ''
 
 	def update_student_marks():
 		global student_name_mark
 		global student_id_mark
 		global oid_of_edit_mark
+		global std_mark_db
 		try:
 			if student_name_mark == "" or student_id_mark == "":
 				messagebox.showerror("Error", " Search Student For Update Marks" ,parent=edit_student_mark_window)
@@ -300,7 +310,7 @@ def edit_student_mark_database(event):
 					response1 = messagebox.askquestion("Attention", " Do you want to update Student Marks into Database? ", parent=edit_student_mark_window)
 					if response1 == "yes":
 						marks_year_temp = 'Grade'+str(edit_grade_mark_entry.get())+' Term'+str(edit_term_mark_entry.get())+' '+str(edit_year_mark_entry.get())
-						conn = sqlite3.connect('data/student_mark_database.db')
+						conn = sqlite3.connect(std_mark_db)
 						c = conn.cursor()
 						c.execute("""UPDATE student_mark SET
 							id = :id,
@@ -391,10 +401,11 @@ def edit_student_mark_database(event):
 		global student_name_mark
 		global student_id_mark
 		global oid_of_edit_mark
+		global std_mark_db
 		if oid_of_edit_mark !='':
 			response4 = messagebox.askquestion("Warning", " Do you want to DELETE All Marks? \n This process can't be undo", parent=edit_student_mark_window)
 			if response4 == 'yes':
-				conn = sqlite3.connect('data/student_mark_database.db')
+				conn = sqlite3.connect(std_mark_db)
 				c = conn.cursor()
 				c.execute("DELETE from student_mark WHERE oid="+ str(oid_of_edit_mark))
 				conn.commit()
@@ -449,10 +460,13 @@ def edit_student_mark_database(event):
 					year_search_window.destroy()
 
 			# Display
+			global img_icon
+			global std_mark_db
+			global edit_mark_year_search_record
 			year_search_window = Toplevel()
-			year_search_window.title('Student Database - Search Result')
+			year_search_window.title('S.M.S. - Search Result')
 			year_search_window.resizable(False, False)
-			year_search_window.iconbitmap('data/image/icon.ico')
+			year_search_window.iconbitmap(img_icon)
 			year_search_window.grab_set()
 			# Frame
 			year_search_frame = LabelFrame(year_search_window, padx=0, pady=0,  bg="#424242", relief="flat")
@@ -467,8 +481,7 @@ def edit_student_mark_database(event):
 			year_search_list.bind('<<ListboxSelect>>', edit_year_show_mark)
 			year_scrollbar.config(command=year_search_list.yview)
 
-			global edit_mark_year_search_record
-			conn = sqlite3.connect('data/student_mark_database.db')
+			conn = sqlite3.connect(std_mark_db)
 			c = conn.cursor()
 			c.execute("SELECT *, oid FROM student_mark WHERE id like '%'||?||'%'",(student_id_mark,))
 			edit_mark_year_search_record = c.fetchall()
@@ -477,13 +490,15 @@ def edit_student_mark_database(event):
 			for show in edit_mark_year_search_record:
 				show_name='     '+str(itemgetter(2)(show))
 				year_search_list.insert(END, show_name)
-			
+		
+		global img_icon
+		global std_detail_db
 		global edit_mark_search_record
 		edit_mark_search_record = ()
 		if edit_student_id_mark_search_entry.get() != "":
 			search_id_temp = edit_student_id_mark_search_entry.get()
 			search_id = search_id_temp.split(" ",2)[0]
-			conn = sqlite3.connect('data/student_detail_database.db')
+			conn = sqlite3.connect(std_detail_db)
 			c = conn.cursor()
 			c.execute("SELECT *, oid FROM student_detail WHERE admission_number like '%'||?||'%'",(search_id,))
 			edit_mark_search_record = c.fetchall()
@@ -493,7 +508,7 @@ def edit_student_mark_database(event):
 		elif edit_student_name_mark_search_entry.get() != "":
 			search_name_temp = edit_student_name_mark_search_entry.get()
 			search_name = search_name_temp.split(" ",2)[0]
-			conn = sqlite3.connect('data/student_detail_database.db')
+			conn = sqlite3.connect(std_detail_db)
 			c = conn.cursor()
 			c.execute("SELECT *, oid FROM student_detail WHERE full_name like '%'||?||'%'",(search_name,))
 			edit_mark_search_record = c.fetchall()
@@ -504,9 +519,9 @@ def edit_student_mark_database(event):
 		if edit_mark_search_record != ():
 			# Display
 			mark_search_window = Toplevel()
-			mark_search_window.title('Student Database - Search Result')
+			mark_search_window.title('S.M.S. - Search Result')
 			mark_search_window.resizable(False, False)
-			mark_search_window.iconbitmap('data/image/icon.ico')
+			mark_search_window.iconbitmap(img_icon)
 			mark_search_window.grab_set()
 			# Frame
 			mark_search_frame = LabelFrame(mark_search_window, padx=0, pady=0,  bg="#424242", relief="flat")
@@ -546,7 +561,7 @@ def edit_student_mark_database(event):
 	# Label
 	edit_student_id_mark_search_label = Label(edit_student_mark_search_frame, text="Student ID :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
 	edit_student_name_mark_search_label = Label(edit_student_mark_search_frame, text="Student Name :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
-	logo_edit_mark_label = Label(edit_student_mark_menu_frame, text="PATHAKADA NAVODYA M.V", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
+	logo_edit_mark_label = Label(edit_student_mark_menu_frame, text="Student Management System", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
 	edit_student_id_mark_label1 = Label(edit_student_mark_id_name_frame, text="Student ID :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
 	edit_student_id_mark_label2 = Label(edit_student_mark_id_name_frame, text="None", width=65, padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
 	edit_student_name_mark_label1 = Label(edit_student_mark_id_name_frame, text="Student Name :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
@@ -674,16 +689,18 @@ def edit_student_mark_database(event):
 	edit_student_mark_search_button.grid(row=0, column=4, padx=10)
 
 def add_student_mark_database(event):
+	global img_icon
 	add_student_mark_window =  Toplevel()
-	add_student_mark_window.title('Student Database - Add Student Marks')
+	add_student_mark_window.title('S.M.S. - Add Student Marks')
 	add_student_mark_window.resizable(False, False)
-	add_student_mark_window.iconbitmap('data/image/icon.ico')
+	add_student_mark_window.iconbitmap(img_icon)
 	add_student_mark_window.grab_set()
 	#root.geometry("800x600")
 
 	def submit_student_marks():
 		global student_name_mark
 		global student_id_mark
+		global std_mark_db
 		try:
 			if student_name_mark == "" or student_id_mark == "":
 				messagebox.showerror("Error", " Search Student For Add Marks" ,parent=add_student_mark_window)
@@ -694,7 +711,7 @@ def add_student_mark_database(event):
 					response1 = messagebox.askquestion("Attention", " Do you want to add Student Marks into Database? ", parent=add_student_mark_window)
 					if response1 == "yes":
 						marks_year_temp = 'Grade'+str(add_grade_mark_entry.get())+' Term'+str(add_term_mark_entry.get())+' '+str(add_year_mark_entry.get())
-						conn = sqlite3.connect('data/student_mark_database.db')
+						conn = sqlite3.connect(std_mark_db)
 						c = conn.cursor()
 						c.execute("INSERT INTO student_mark VALUES (:id,:name,:year,:buddhism,:sinhala,:mathematics,:science,:english,:history,:tamil,:ict,:agriculture,:homescience,:health,:media,:music,:dancing,:art,:geography,:civic)",
 							{
@@ -771,13 +788,14 @@ def add_student_mark_database(event):
 				add_student_id_mark_label2.config(text=student_id_mark)
 				add_student_name_mark_label2.config(text=student_name_mark)
 				mark_search_window.destroy()
-
+		global img_icon
 		global mark_search_record
+		global std_detail_db
 		mark_search_record = ()
 		if add_student_id_mark_search_entry.get() != "":
 			search_id_temp = add_student_id_mark_search_entry.get()
 			search_id = search_id_temp.split(" ",2)[0]
-			conn = sqlite3.connect('data/student_detail_database.db')
+			conn = sqlite3.connect(std_detail_db)
 			c = conn.cursor()
 			c.execute("SELECT *, oid FROM student_detail WHERE admission_number like '%'||?||'%'",(search_id,))
 			mark_search_record = c.fetchall()
@@ -787,7 +805,7 @@ def add_student_mark_database(event):
 		elif add_student_name_mark_search_entry.get() != "":
 			search_name_temp = add_student_name_mark_search_entry.get()
 			search_name = search_name_temp.split(" ",2)[0]
-			conn = sqlite3.connect('data/student_detail_database.db')
+			conn = sqlite3.connect(std_detail_db)
 			c = conn.cursor()
 			c.execute("SELECT *, oid FROM student_detail WHERE full_name like '%'||?||'%'",(search_name,))
 			mark_search_record = c.fetchall()
@@ -798,9 +816,9 @@ def add_student_mark_database(event):
 		if mark_search_record != ():
 			# Display
 			mark_search_window = Toplevel()
-			mark_search_window.title('Student Database - Search Result')
+			mark_search_window.title('S.M.S. - Search Result')
 			mark_search_window.resizable(False, False)
-			mark_search_window.iconbitmap('data/image/icon.ico')
+			mark_search_window.iconbitmap(img_icon)
 			mark_search_window.grab_set()
 			# Frame
 			mark_search_frame = LabelFrame(mark_search_window, padx=0, pady=0,  bg="#424242", relief="flat")
@@ -845,7 +863,7 @@ def add_student_mark_database(event):
 	# Label
 	add_student_id_mark_search_label = Label(add_student_mark_search_frame, text="Student ID :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
 	add_student_name_mark_search_label = Label(add_student_mark_search_frame, text="Student Name :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
-	logo_add_mark_label = Label(add_student_mark_menu_frame, text="PATHAKADA NAVODYA M.V", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
+	logo_add_mark_label = Label(add_student_mark_menu_frame, text="Student Management System", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman")) # logo image add later
 	add_student_id_mark_label1 = Label(add_student_mark_id_name_frame, text="Student ID :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
 	add_student_id_mark_label2 = Label(add_student_mark_id_name_frame, text="None", width=65, padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
 	add_student_name_mark_label1 = Label(add_student_mark_id_name_frame, text="Student Name :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
@@ -972,10 +990,11 @@ def add_student_mark_database(event):
 
 
 def search_student_database(event):
+	global img_icon
 	search_student_main_window =  Toplevel()
-	search_student_main_window.title('Student Database - Search Student Details/Marks')
+	search_student_main_window.title('S.M.S. - Search Student Details/Marks')
 	search_student_main_window.resizable(False, False)
-	search_student_main_window.iconbitmap('data/image/icon.ico')
+	search_student_main_window.iconbitmap(img_icon)
 	search_student_main_window.grab_set()
 	#root.geometry("800x600")
 
@@ -1014,13 +1033,14 @@ def search_student_database(event):
 			search_student_main_search_text.insert(END, ' Identity Type : '+ str(student_identity_search) + '\n')
 			search_student_main_search_text.config(state=DISABLED)
 			search_student_main_text_frame.grid(row=2, column=0, sticky=W+E)
-
+		global img_icon
 		global search_main_details
+		global std_detail_db
 		search_main_details = ()
 		if search_student_main_id_entry.get() != "":
 			search_id_temp = search_student_main_id_entry.get()
 			search_id = search_id_temp.split(" ",2)[0]
-			conn = sqlite3.connect('data/student_detail_database.db')
+			conn = sqlite3.connect(std_detail_db)
 			c = conn.cursor()
 			c.execute("SELECT *, oid FROM student_detail WHERE admission_number like '%'||?||'%'",(search_id,))
 			search_main_details = c.fetchall()
@@ -1030,7 +1050,7 @@ def search_student_database(event):
 		elif search_student_main_name_entry.get() != "":
 			search_name_temp = search_student_main_name_entry.get()
 			search_name = search_name_temp.split(" ",2)[0]
-			conn = sqlite3.connect('data/student_detail_database.db')
+			conn = sqlite3.connect(std_detail_db)
 			c = conn.cursor()
 			c.execute("SELECT *, oid FROM student_detail WHERE full_name like '%'||?||'%'",(search_name,))
 			search_main_details = c.fetchall()
@@ -1041,9 +1061,9 @@ def search_student_database(event):
 		if search_main_details != ():
 			# Display
 			search_main_details_search_window = Toplevel()
-			search_main_details_search_window.title('Student Database - Search Result')
+			search_main_details_search_window.title('S.M.S. - Search Result')
 			search_main_details_search_window.resizable(False, False)
-			search_main_details_search_window.iconbitmap('data/image/icon.ico')
+			search_main_details_search_window.iconbitmap(img_icon)
 			search_main_details_search_window.grab_set()
 			# Frame
 			search_main_details_search_frame = LabelFrame(search_main_details_search_window, padx=0, pady=0,  bg="#424242", relief="flat")
@@ -1062,14 +1082,16 @@ def search_student_database(event):
 			search_main_details_scrollbar.config(command=search_main_details_search_list.yview)
 
 	def search_main_marks_search():
+		global img_icon
+		global std_mark_db
 		if student_id_search == '':
 			messagebox.showerror("Error", " Search Student Result Empty! \n Pl Search Student First" ,parent=search_student_main_window)
 		else:
 			# Display
 			search_main_marks_search_window = Toplevel()
-			search_main_marks_search_window.title('Student Database - Student Marks')
+			search_main_marks_search_window.title('S.M.S. - Student Marks')
 			search_main_marks_search_window.resizable(False, False)
-			search_main_marks_search_window.iconbitmap('data/image/icon.ico')
+			search_main_marks_search_window.iconbitmap(img_icon)
 			search_main_marks_search_window.grab_set()
 
 			def show_student_marks():
@@ -1077,7 +1099,7 @@ def search_student_database(event):
 				search_mark_years = []
 				search_mark_years.clear()
 				search_id = student_id_search
-				conn = sqlite3.connect('data/student_mark_database.db')
+				conn = sqlite3.connect(std_mark_db)
 				c = conn.cursor()
 				c.execute("SELECT *, oid FROM student_mark WHERE id like '%'||?||'%'",(search_id,))
 				search_main_marks = c.fetchall()
@@ -1133,9 +1155,10 @@ def search_student_database(event):
 				search_main_marks_marks_search_frame.grid(row=2, column=0, sticky=W+E)
 
 			def student_rank(select):
+				global std_mark_db
 				rank_list = []
 				rank_list.clear()
-				conn = sqlite3.connect('data/student_mark_database.db')
+				conn = sqlite3.connect(std_mark_db)
 				c = conn.cursor()
 				c.execute("SELECT *, oid FROM student_mark WHERE year like '%'||?||'%'",(select[2],))
 				rank_search = c.fetchall()
@@ -1192,7 +1215,7 @@ def search_student_database(event):
 	search_student_main_search_frame.grid(row=1, column=0, sticky=W+E)
 	#search_student_main_text_frame.grid(row=2, column=0, sticky=W+E)
 	# Label
-	search_student_main_logo_label = Label(search_student_main_logo_frame, text="PATHAKADA NAVODYA M.V", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman"))
+	search_student_main_logo_label = Label(search_student_main_logo_frame, text="Student Management System", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Verdana", "8","roman"))
 	search_student_main_id_label = Label(search_student_main_search_frame, text="Student ID :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
 	search_student_main_name_label = Label(search_student_main_search_frame, text="Student Name :", padx=5,pady=3, bg='#424242', fg="white", relief="flat",font=("Comic Sans MS", "8", "italic"))
 	search_student_main_logo_label.pack()

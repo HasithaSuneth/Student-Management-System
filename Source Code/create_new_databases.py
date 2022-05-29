@@ -1,13 +1,6 @@
 import os
-import glob
 import sqlite3
-from tkinter import *
-from tkinter import filedialog
-from tkinter import messagebox
-from PIL import ImageTk,Image
-from tkinter import ttk
-from operator import itemgetter
-'''
+
 if os.path.isfile('data/student_detail_database.db')== False:
 	conn = sqlite3.connect('data/student_detail_database.db')
 	c = conn.cursor()
@@ -41,7 +34,7 @@ else:
 		)""")
 	conn.commit()
 	conn.close()
-'''
+
 if os.path.isfile('data/student_mark_database.db')== False:
 	conn = sqlite3.connect('data/student_mark_database.db')
 	c = conn.cursor()
