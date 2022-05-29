@@ -6,7 +6,7 @@ from tkinter import filedialog, messagebox, ttk
 from PIL import ImageTk,Image
 from operator import itemgetter
 
-img_icon = 'data/image/icon2.ico'
+img_icon = 'data/image/icon.ico'
 std_mark_db = 'data/student_mark_database.db'
 std_detail_db = 'data/student_detail_database.db'
 
@@ -75,7 +75,7 @@ def main_menu_window():
 	def edit_marks_leave(event):
 		edit_student_mark_button.config(image=edit_marks_img) 
 
-	logo_img = ImageTk.PhotoImage(Image.open("data/image/logo1.jpg"))
+	logo_img = ImageTk.PhotoImage(Image.open("data/image/logo.jpg"))
 	add_details_img = ImageTk.PhotoImage(Image.open("data/image/add_detail.jpg"))
 	add_details_focus_img = ImageTk.PhotoImage(Image.open("data/image/add_detail_focus.jpg"))
 	search_database_img = ImageTk.PhotoImage(Image.open("data/image/search_database.jpg"))
