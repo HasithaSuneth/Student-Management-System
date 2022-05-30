@@ -58,4 +58,4 @@ Student Management System developed using Python.
 ## Technical Details
 - Database - SQLite
 - Support operating systems (Tested) - Windows, Linux (Ubuntu)
-- File Size - 43MB
+- File Size - 28MB
