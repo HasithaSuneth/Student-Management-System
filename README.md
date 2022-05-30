@@ -5,7 +5,7 @@ Student Management System developed using Python.
 </p>
 
 ## Features
-- ### Authentication System (Username & Password) (Default Username & Password: admin)
+- ### Authentication (Username & Password) (Default Username & Password: admin)
 <p align="center">
   <img width="300" src="https://user-images.githubusercontent.com/87106402/170873747-0be1eca7-5590-4535-9e36-6ba6a2b9b70b.png" alt="Block Diagram">
 </p>
@@ -58,4 +58,4 @@ Student Management System developed using Python.
 ## Technical Details
 - Database - SQLite
 - Support operating systems (Tested) - Windows, Linux (Ubuntu)
-- File Size - 43MB
+- File Size - 28MB
