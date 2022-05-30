@@ -1,1 +1,1 @@
-pyinstaller --noconfirm --windowed --icon "data/image/icon.ico"  "Student_Management_System.py"
+pyinstaller --noconfirm --windowed --add-data "data;data" --icon "data/image/icon.ico"  "Student_Management_System.py"
